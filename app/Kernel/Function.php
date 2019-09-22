@@ -43,40 +43,41 @@ if (! function_exists('validator_mobile')) {
         }
         return null;
     }
+}
 
-    if (! function_exists('str_mobile')) {
-        /**
-         * @param mixed $mobile
-         * @param mixed $replacement
-         * @param mixed $start
-         * @param mixed $length
-         * @return string
-         */
-        function str_mobile($mobile, $replacement, $start, $length): string
-        {
-            return substr_replace($mobile, $replacement, $start, $length);
-        }
+if (! function_exists('str_mobile')) {
+    /**
+    * @param mixed $mobile
+    * @param mixed $replacement
+    * @param mixed $start
+    * @param mixed $length
+    * @return string
+    */    
+    function str_mobile($mobile, $replacement, $start, $length): string
+    {
+        return substr_replace($mobile, $replacement, $start, $length);
     }
-    if (! function_exists('format_throwable')) {
-        /**
-         * Format a throwable to string.
-         * @param Throwable $throwable
-         * @return string
-         */
-        function format_throwable(Throwable $throwable): string
-        {
-            return di()->get(FormatterInterface::class)->format($throwable);
-        }
-    }
+}
 
-    if (! function_exists('queue_push')) {
-        /**
-         * Push a job to async queue.
-         */
-        function queue_push(JobInterface $job, int $delay = 0, string $key = 'default'): bool
-        {
-            $driver = di()->get(DriverFactory::class)->get($key);
-            return $driver->push($job, $delay);
-        }
+if (! function_exists('format_throwable')) {
+    /**
+    * Format a throwable to string.
+    * @param Throwable $throwable
+    * @return string
+    */
+    function format_throwable(Throwable $throwable): string
+    {
+        return di()->get(FormatterInterface::class)->format($throwable);
+    }
+}
+
+if (! function_exists('queue_push')) {
+    /**
+    * Push a job to async queue.
+    */
+    function queue_push(JobInterface $job, int $delay = 0, string $key = 'default'): bool
+    {
+        $driver = di()->get(DriverFactory::class)->get($key);
+        return $driver->push($job, $delay);
     }
 }
